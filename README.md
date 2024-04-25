@@ -68,7 +68,7 @@ Collection(2) [
 
 ### Database without .env
 ```JS
-require('../nodequent/dist').init({
+require('nodequent').init({
     database: {
         host: 'localhost',
         database: 'nodequent',
