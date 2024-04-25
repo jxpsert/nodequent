@@ -69,4 +69,86 @@ export class Collection extends Array {
         }
     }
 
+    /**
+     * Convert the collection to an array.
+     * @returns The collection as an array
+     * @since 1.0.6
+     */
+    public toArray(): any[] {
+        const arr = [];
+        for (let i = 0; i < this.length; i++) {
+            if (this[i] instanceof Model)
+                arr.push(this[i].toArray());
+            else
+                arr.push(this[i]);
+        }
+
+        return arr;
+    }
+
+    /**
+     * Call a function on each item in the collection.
+     * @param callback The function to call
+     * @returns void
+     * @since 1.0.6
+     */
+    public each(callback: (value: any, index: number) => void): void {
+        this.forEach(callback);
+    }
+
+    /**
+     * Merge another collection into this collection and return a new collection.
+     * @param collection The collection to merge
+     * @returns void
+     * @since 1.0.6
+     */
+    public merge(collection: Collection): Collection {
+        return new Collection([...this, ...collection]);
+    }
+
+    /**
+     * Get the sum of all items in the collection.
+     * @returns The sum of all items
+     * @since 1.0.6
+     */
+    public sum(): number {
+        return this.reduce((acc, val) => acc + val, 0);
+    }
+
+    /**
+     * Get the average of all items in the collection.
+     * @returns The average of all items
+     * @since 1.0.6
+     */
+    public avg(): number {
+        return this.sum() / this.length;
+    }
+
+    /**
+     * Get the max value in the collection.
+     * @returns The max value
+     * @since 1.0.6
+     */
+    public max(): number {
+        return Math.max(...this);
+    }
+
+    /**
+     * Get the min value in the collection.
+     * @returns The min value
+     * @since 1.0.6
+     */
+    public min(): number {
+        return Math.min(...this);
+    }
+
+    /**
+     * Pluck a specific attribute from the collection.
+     * @param $attribute The attribute to pluck
+     * @returns Collection
+     * @since 1.0.6
+     */
+    public pluck($attribute: string) {
+        return this.map((item) => item[$attribute]);
+    }
 }
