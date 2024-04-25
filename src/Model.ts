@@ -42,12 +42,19 @@ export class Model {
      */
     private attributes = {};
 
+    /**
+     * @var object The original attributes of the model.
+     * @since 1.0.5
+     */
+    public original = {};
+
     constructor(attributes: any = {}) {
         if (attributes) {
             this.attributes = attributes;
             this.registerAttributes(attributes);
         }
 
+        this.original = Object.assign({}, attributes);
         this.registerAttributes(this.fillable);
     }
 
@@ -81,6 +88,45 @@ export class Model {
 
             this.attributes[key] = null;
         });
+    }
+
+    /**
+     * Get the original value of an attribute.
+     * @param key The attribute
+     * @returns The value of the attribute
+     * @since 1.0.5
+     */
+    public getOriginal(key: string): any {
+        return this.original[key];
+    }
+
+    /**
+     * Gets attributes that are different than the original attributes.
+     * @returns object The model's dirty attributes
+     * @since 1.0.5
+     */
+    public getDirty() {
+        let dirty = {};
+        Object.keys(this.attributes).forEach((key) => {
+            if (this.attributes[key] !== this.original[key]) {
+                dirty[key] = this.attributes[key];
+            }
+        });
+        return dirty;
+    }
+
+    /**
+     * Check if the model, or a specific attribute, is dirty.
+     * @param [key] The attribute to check
+     * @returns boolean
+     * @since 1.0.5
+     */
+    public isDirty(key?: string): boolean {
+        if (key) {
+            return this.attributes[key] !== this.original[key];
+        }
+
+        return Object.keys(this.getDirty()).length > 0;
     }
 
     /**
@@ -145,6 +191,8 @@ export class Model {
 
         attributes['updated_at'] = 'NOW()';
 
+        this.original = this.attributes;
+
         if (this.attributes[this.primaryKey]) {
             sql = `UPDATE ${this.table} SET ${Object.keys(attributes).map(key => `${key} = ${attributes[key]}`).join(', ')} WHERE ${this.primaryKey} = ${this.attributes[this.primaryKey]}`;
         } else {
@@ -202,6 +250,7 @@ export class Model {
         return new Promise(async (resolve) => {
             const model = await (this.constructor as typeof Model).find(this.attributes[this.primaryKey]);
             this.attributes = model.attributes;
+            this.original = Object.assign({}, this.attributes);
             this.registerAttributes(this.attributes);
             resolve(this);
         });
