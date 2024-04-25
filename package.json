@@ -1,0 +1,26 @@
+{
+  "name": "nodequent",
+  "version": "1.0.1",
+  "description": "Laravel Eloquent for Node.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsup"
+  },
+  "keywords": [],
+  "author": "jxpsert",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jxpsert/nodequent"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5"
+  }
+}
