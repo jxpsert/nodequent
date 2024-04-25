@@ -1,10 +1,11 @@
 {
   "name": "nodequent",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Laravel Eloquent for Node.js",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "docs": "typedoc"
   },
   "keywords": [],
   "author": "jxpsert",
@@ -20,6 +21,7 @@
   "devDependencies": {
     "@types/node": "^20.12.7",
     "tsup": "^8.0.2",
+    "typedoc": "^0.25.13",
     "typescript": "^5.4.5"
   }
 }

@@ -1,5 +1,7 @@
 # nodequent
 
+[![GitHub version](https://badge.fury.io/gh/jxpsert%2Fnodequent.svg)](https://badge.fury.io/gh/jxpsert%2Fnodequent) [![npm version](https://badge.fury.io/js/nodequent.svg)](https://badge.fury.io/js/nodequent)
+
 Use Laravel's Eloquent functionality from the comfort of your own Node.js environment.
 
 ## Installation
