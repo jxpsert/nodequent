@@ -1,6 +1,7 @@
 import { Model } from './src/Model';
 import { Collection } from './src/Collection';
 import { Database } from './src/Database';
+import { Table } from './src/Table';
 
 /**
  * Initialise the package.
@@ -12,10 +13,13 @@ const init = (options?: { database?: { host: string, user: string, password: str
     if (options && options.database) {
         Database.setOptions(options.database);
     }
+
+    console.info('Nodequent initialised');
 };
 
 module.exports = {
     init,
     Model,
-    Collection
+    Collection,
+    Table
 }

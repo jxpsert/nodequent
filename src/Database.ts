@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const Logger = require('./Logger');
 
 /**
  * Database class to handle database connections and interactions.
@@ -57,14 +58,14 @@ export class Database {
                     database: process.env.DB_NAME
                 });
             }
-        }
 
-        this.connection.connect((err: any) => {
-            if (err) {
-                throw new Error(err);
-                return;
-            }
-        });
+            this.connection.connect((err: any) => {
+                if (err) {
+                    throw new Error(err);
+                    return;
+                }
+            });
+        }
     }
 
     /**
@@ -84,7 +85,6 @@ export class Database {
                     reject(err);
                 }
                 resolve(result);
-                this.disconnect();
             });
         });
     }

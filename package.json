@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsup",
-    "docs": "typedoc"
+    "docs": "typedoc",
+    "test": "npm run build && node test/index.js"
   },
   "keywords": [],
   "author": "jxpsert",
